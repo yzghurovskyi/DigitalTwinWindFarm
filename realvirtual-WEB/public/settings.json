@@ -1,0 +1,11 @@
+{
+  "defaultModel": "models/animated_wind_turbine.glb",
+  "analytics": {
+    "googleAnalyticsId": "G-4XNW76DQQG"
+  },
+  "pluginConfig": {
+    "windfarm-plugin": {
+      "backendUrl": "https://app-windfarm-lab-001.azurewebsites.net"
+    }
+  }
+}

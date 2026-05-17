@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": { "value": "westeurope" },
+    "adtName": { "value": "adt-windfarm-lab-001" },
+    "iotHubName": { "value": "iothubwindfarmlab001" },
+    "storageAccountName": { "value": "stwindfarmlab001" },
+    "lawName": { "value": "log-windfarm-lab-001" },
+    "functionAppName": { "value": "func-windfarm-lab-002" },
+    "backendAppName": { "value": "app-windfarm-lab-001" },
+    "staticWebAppName": { "value": "swa-windfarm-lab-001" }
+  }
+}

@@ -1,0 +1,450 @@
+{
+  "info": {
+    "name": "Wind Farm Digital Twin – Control API",
+    "_postman_id": "wf-digital-twin-control-v1",
+    "description": "All backend control endpoints for the Wind Farm Digital Twin lab.\n\nEnvironments:\n- **Local** — http://localhost:8080\n- **Azure** — https://app-windfarm-lab-001.azurewebsites.net\n\nSet the `baseUrl` variable in the active environment before running.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string",
+      "description": "Override with Azure URL when testing against deployed backend"
+    },
+    {
+      "key": "turbineId",
+      "value": "Turbine_01",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "State",
+      "item": [
+        {
+          "name": "GET Current State",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/state",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "state"]
+            },
+            "description": "Returns current KPI snapshot, turbine list (with resourcePct & running), and last 10 alerts."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Turbine Control",
+      "item": [
+        {
+          "name": "STOP Turbine_01",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_01\",\n  \"running\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/turbine",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "turbine"]
+            },
+            "description": "Stops the turbine. powerKw and rotorRpm become 0; status → \"Stopped\". UI updates via WebSocket immediately."
+          },
+          "response": []
+        },
+        {
+          "name": "START Turbine_01",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_01\",\n  \"running\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/turbine",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "turbine"]
+            },
+            "description": "Restarts a previously stopped turbine. Power and RPM resume on next telemetry tick."
+          },
+          "response": []
+        },
+        {
+          "name": "STOP Turbine_02",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_02\",\n  \"running\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/turbine",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "turbine"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "START Turbine_02",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_02\",\n  \"running\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/turbine",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "turbine"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "STOP Turbine_03",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_03\",\n  \"running\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/turbine",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "turbine"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "START Turbine_03",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_03\",\n  \"running\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/turbine",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "turbine"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Damage & Repair",
+      "item": [
+        {
+          "name": "DAMAGE – Minor (−20%)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_01\",\n  \"damagePct\": 20\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/damage",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "damage"]
+            },
+            "description": "Minor damage. If resource was 100% → drops to 80%. No alarm yet (threshold is <70%)."
+          },
+          "response": []
+        },
+        {
+          "name": "DAMAGE – Bird Strike (−45%)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_02\",\n  \"damagePct\": 45\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/damage",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "damage"]
+            },
+            "description": "Significant damage. If resource was 100% → drops to 55%. Triggers WARNING alarm (<70% threshold)."
+          },
+          "response": []
+        },
+        {
+          "name": "DAMAGE – Critical (−75%)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_03\",\n  \"damagePct\": 75\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/damage",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "damage"]
+            },
+            "description": "Critical damage. Resource drops below 30% → turbine auto-stops with CRITICAL alert."
+          },
+          "response": []
+        },
+        {
+          "name": "REPAIR – Partial (+50%)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_02\",\n  \"repairPct\": 50\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/repair",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "repair"]
+            },
+            "description": "Partial repair. After this call, manually START the turbine if it was auto-stopped."
+          },
+          "response": []
+        },
+        {
+          "name": "REPAIR – Full (+100%)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_01\",\n  \"repairPct\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/repair",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "repair"]
+            },
+            "description": "Full repair restores resource to 100% (capped by server). Remember to START the turbine afterwards."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Alerts",
+      "item": [
+        {
+          "name": "ACKNOWLEDGE Alarm – Turbine_01",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_01\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/acknowledge",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "acknowledge"]
+            },
+            "description": "Pushes an operator-acknowledged info alert to the WebSocket stream. Visible in UI alert panel."
+          },
+          "response": []
+        },
+        {
+          "name": "ACKNOWLEDGE Alarm – Turbine_02",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_02\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/acknowledge",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "acknowledge"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ACKNOWLEDGE Alarm – Turbine_03",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"turbineId\": \"Turbine_03\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/control/acknowledge",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "control", "acknowledge"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Demo Scenarios",
+      "item": [
+        {
+          "name": "[Scenario] Bird Strike on Turbine_02",
+          "item": [
+            {
+              "name": "1. Damage Turbine_02 (−45%)",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"turbineId\": \"Turbine_02\",\n  \"damagePct\": 45\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/control/damage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "control", "damage"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "2. Acknowledge Alarm",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"turbineId\": \"Turbine_02\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/control/acknowledge",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "control", "acknowledge"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "3. Repair Turbine_02 (+50%)",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"turbineId\": \"Turbine_02\",\n  \"repairPct\": 50\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/control/repair",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "control", "repair"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "4. Restart Turbine_02",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"turbineId\": \"Turbine_02\",\n  \"running\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/control/turbine",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "control", "turbine"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "5. Verify State",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/state",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "state"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "[Scenario] Planned Maintenance – Turbine_03",
+          "item": [
+            {
+              "name": "1. Stop Turbine_03",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"turbineId\": \"Turbine_03\",\n  \"running\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/control/turbine",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "control", "turbine"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "2. Full Repair (+100%)",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"turbineId\": \"Turbine_03\",\n  \"repairPct\": 100\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/control/repair",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "control", "repair"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "3. Start Turbine_03",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"turbineId\": \"Turbine_03\",\n  \"running\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/control/turbine",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "control", "turbine"]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

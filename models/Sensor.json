@@ -1,0 +1,13 @@
+{
+  "@id": "dtmi:windfarm:Sensor;1",
+  "@type": "Interface",
+  "displayName": "Sensor",
+  "contents": [
+    { "@type": "Property", "name": "name", "schema": "string" },
+    { "@type": "Property", "name": "kind", "schema": "string" },
+    { "@type": "Property", "name": "unit", "schema": "string" },
+    { "@type": "Property", "name": "value", "schema": "double" },
+    { "@type": "Property", "name": "online", "schema": "boolean" }
+  ],
+  "@context": "dtmi:dtdl:context;2"
+}

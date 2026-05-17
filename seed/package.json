@@ -1,0 +1,16 @@
+{
+  "name": "windfarm-seed",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "upload-models": "node upload-models.mjs",
+    "seed": "node seed-twins.mjs",
+    "queries": "node run-queries.mjs"
+  },
+  "dependencies": {
+    "@azure/digital-twins-core": "^2.0.0",
+    "@azure/identity": "^4.13.1",
+    "dotenv": "^16.4.5"
+  }
+}

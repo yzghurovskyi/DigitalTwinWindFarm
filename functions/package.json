@@ -1,0 +1,16 @@
+{
+  "name": "windfarm-functions",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/iot-hub-processor.mjs",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {
+    "@azure/digital-twins-core": "^2.0.0",
+    "@azure/functions": "^4.7.0",
+    "@azure/identity": "^4.13.1",
+    "dotenv": "^16.4.5"
+  }
+}

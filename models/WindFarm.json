@@ -1,0 +1,18 @@
+{
+  "@id": "dtmi:windfarm:WindFarm;1",
+  "@type": "Interface",
+  "displayName": "Wind Farm",
+  "contents": [
+    { "@type": "Property", "name": "name", "schema": "string" },
+    { "@type": "Property", "name": "location", "schema": "string" },
+    { "@type": "Property", "name": "totalPowerKw", "schema": "double" },
+    { "@type": "Property", "name": "averageWindSpeedMs", "schema": "double" },
+    { "@type": "Property", "name": "lastUpdated", "schema": "string" },
+    {
+      "@type": "Relationship",
+      "name": "contains",
+      "target": "dtmi:windfarm:Turbine;1"
+    }
+  ],
+  "@context": "dtmi:dtdl:context;2"
+}

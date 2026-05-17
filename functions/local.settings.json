@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "WEBSITE_NODE_DEFAULT_VERSION": "~22",
+    "ADT_URL": "",
+    "IOT_HUB_CONNECTION": "",
+    "IOT_HUB_EVENTHUB_NAME": "",
+    "BACKEND_INGEST_URL": ""
+  }
+}

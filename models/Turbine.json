@@ -1,0 +1,37 @@
+{
+  "@id": "dtmi:windfarm:Turbine;1",
+  "@type": "Interface",
+  "displayName": "Turbine",
+  "contents": [
+    { "@type": "Property", "name": "name", "schema": "string" },
+    { "@type": "Property", "name": "status", "schema": "string" },
+    { "@type": "Property", "name": "windSpeedMs", "schema": "double" },
+    { "@type": "Property", "name": "vibrationMmS", "schema": "double" },
+    { "@type": "Property", "name": "nacelleTempC", "schema": "double" },
+    { "@type": "Property", "name": "rotorRpm", "schema": "double" },
+    { "@type": "Property", "name": "powerKw", "schema": "double" },
+    { "@type": "Property", "name": "alarmActive", "schema": "boolean" },
+    { "@type": "Property", "name": "lastUpdated", "schema": "string" },
+    {
+      "@type": "Relationship",
+      "name": "hasSensor",
+      "target": "dtmi:windfarm:Sensor;1"
+    },
+    {
+      "@type": "Relationship",
+      "name": "hasNacelle",
+      "target": "dtmi:windfarm:Nacelle;1"
+    },
+    {
+      "@type": "Relationship",
+      "name": "hasBladeSet",
+      "target": "dtmi:windfarm:BladeSet;1"
+    },
+    {
+      "@type": "Relationship",
+      "name": "locatedIn",
+      "target": "dtmi:windfarm:WindFarm;1"
+    }
+  ],
+  "@context": "dtmi:dtdl:context;2"
+}

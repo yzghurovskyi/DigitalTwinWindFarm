@@ -1,0 +1,2 @@
+# Exclude debug/development-only triggers from production deployments
+**/debug-iot-trigger.mjs

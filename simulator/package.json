@@ -1,0 +1,16 @@
+{
+  "name": "windfarm-simulator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/simulate.mjs normal",
+    "storm": "node src/simulate.mjs storm",
+    "fault": "node src/simulate.mjs fault"
+  },
+  "dependencies": {
+    "azure-iot-device": "^1.18.4",
+    "azure-iot-device-mqtt": "^1.16.4",
+    "dotenv": "^16.4.5"
+  }
+}

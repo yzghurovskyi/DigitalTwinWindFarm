@@ -1,0 +1,10 @@
+{
+  "@id": "dtmi:windfarm:BladeSet;1",
+  "@type": "Interface",
+  "displayName": "Blade Set",
+  "contents": [
+    { "@type": "Property", "name": "pitchAngleDeg", "schema": "double" },
+    { "@type": "Property", "name": "healthScore", "schema": "double" }
+  ],
+  "@context": "dtmi:dtdl:context;2"
+}

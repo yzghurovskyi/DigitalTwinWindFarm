@@ -1,0 +1,11 @@
+{
+  "@id": "dtmi:windfarm:Nacelle;1",
+  "@type": "Interface",
+  "displayName": "Nacelle",
+  "contents": [
+    { "@type": "Property", "name": "gearboxTempC", "schema": "double" },
+    { "@type": "Property", "name": "yawAngleDeg", "schema": "double" },
+    { "@type": "Property", "name": "online", "schema": "boolean" }
+  ],
+  "@context": "dtmi:dtdl:context;2"
+}
