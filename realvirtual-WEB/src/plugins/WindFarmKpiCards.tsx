@@ -26,7 +26,7 @@ export function WindFarmPowerKpi(_props: UISlotProps) {
       value={kpi.totalPowerKw.toFixed(0)}
       unit="kW"
       color="#4fc3f7"
-      secondary="3 turbines"
+      secondary="1 turbine"
       sparkline={sparkline}
       animate={false}
     />

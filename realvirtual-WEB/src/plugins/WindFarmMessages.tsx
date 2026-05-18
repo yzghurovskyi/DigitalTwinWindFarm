@@ -22,11 +22,10 @@ export function WindFarmStatusMessage(_props: UISlotProps) {
   const dirStr = t.windDirectionDeg !== undefined
     ? ` · ${t.windDirectionDeg.toFixed(0)}°`
     : '';
-  const effectivePowerKw = t.powerKw * yawPct;
   return (
     <TileCard
       title={t.turbineId}
-      subtitle={`${effectivePowerKw.toFixed(0)} kW · ${t.windSpeedMs.toFixed(1)} m/s${dirStr} · ${t.rotorRpm.toFixed(0)} RPM · ${Math.round(yawPct * 100)}% yaw`}
+      subtitle={`${t.powerKw.toFixed(0)} kW · ${t.windSpeedMs.toFixed(1)} m/s${dirStr} · ${t.rotorRpm.toFixed(0)} RPM · ${Math.round(yawPct * 100)}% yaw`}
       severity="info"
       icon="speed"
       timestamp="Live"
